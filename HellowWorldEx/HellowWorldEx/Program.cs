@@ -8,15 +8,32 @@
             if (args.Length > 0) {
                 str = args[0];
             } else {
-                Console.WriteLine("Enter your sleng");
+                Console.WriteLine("Enter your state ment or number");
 
                 str = Console.ReadLine() ?? "";
             }
 
             str = str.Trim();
-            str = str == string.Empty ? "Back to triangle" : str;
 
-            await Hello(str);
+            if (int.TryParse(str, out int number)) {
+                await Hello(number);
+            } else {
+                str = str == string.Empty ? "Back to triangle" : str;
+
+                await Hello(str);
+            }
+        }
+
+        public async static Task Hello(int number) {
+            Console.WriteLine(number);
+            Console.WriteLine();
+
+            for (int i = 0; i < number; i++) {
+                for (int j = 0; j < i + 1; j++) {
+                    Console.Write("*");
+                }
+                Console.WriteLine();
+            }
         }
 
         public async static Task Hello(string text) {
